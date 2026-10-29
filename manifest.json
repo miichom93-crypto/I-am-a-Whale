@@ -1,0 +1,16 @@
+{
+  "name": "I AM A WHALE - Ultimate Flex Suite",
+  "short_name": "WhaleFlex",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#f59e0b",
+  "description": "Das ultimative Status-Symbol und Krypto-Flex für Windows.",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

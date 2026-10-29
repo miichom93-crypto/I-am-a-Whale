@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I AM A WHALE // Ultimate Flex Suite</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-crypto { font-family: 'Orbitron', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+
+    <!-- Header & Mode Switcher -->
+    <header class="border-b border-slate-900 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl animate-bounce">🐋</span>
+                <h1 class="font-crypto font-black tracking-wider text-xl bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500 bg-clip-text text-transparent">
+                    I AM A WHALE
+                </h1>
+            </div>
+
+            <!-- Mode Switcher Tabs -->
+            <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-crypto">
+                <button onclick="switchMode(1)" id="tab-1" class="px-4 py-2 rounded-lg transition-all bg-amber-500 text-slate-950 font-bold shadow">
+                    Modus 1: Whale Clock
+                </button>
+                <button onclick="switchMode(2)" id="tab-2" class="px-4 py-2 rounded-lg transition-all text-slate-400 hover:text-white">
+                    Modus 2: Sats for Flex
+                </button>
+            </div>
+
+            <div id="btc-ticker" class="text-xs font-crypto bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-amber-400">
+                BTC Live: Lade Kurs...
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-4xl mx-auto px-6 py-10 w-full flex-grow">
+
+        <!-- ================= MODUS 1: WHALE CLOCK ================= -->
+        <div id="mode-1-container" class="space-y-12">
+            <div class="text-center max-w-xl mx-auto space-y-6">
+                <div class="inline-block p-4 rounded-3xl bg-amber-500/10 border border-amber-500/20 shadow-2xl shadow-amber-500/10 mb-2">
+                    <span class="text-6xl">🪙</span>
+                </div>
+                <h2 class="font-crypto text-3xl font-black text-white">
+                    Das All-Time-High Monument
+                </h2>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Sichere dir deinen Platz im historischen Pantheon. Wer zum höchsten Bitcoin-Kurs eingekauft hat, regiert die Rangliste auf Ewigkeit.
+                </p>
+
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3 text-left">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-400">Fixer Einstiegspreis:</span>
+                        <span class="font-crypto text-white font-bold">1.00 BTC (Simuliert)</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-400">Aktueller Fiat-Wert:</span>
+                        <span id="fiat-price-1" class="font-crypto text-amber-400 font-bold">--</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2 text-left">
+                    <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Dein Wal-Alias</label>
+                    <input type="text" id="whale-name-1" placeholder="z. B. Satoshi Nakamoto" 
+                        class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400 font-crypto text-sm">
+                </div>
+
+                <button onclick="buyMode1()" class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 font-crypto font-black tracking-wider text-base shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
+                    1 BTC BEZAHLEN & AURA SICHERN
+                </button>
+            </div>
+
+            <!-- Mode 1 Leaderboard -->
+            <div class="space-y-4">
+                <h3 class="font-crypto font-bold text-lg text-white">THE PANTHEON OF ATH (ALL-TIME-HIGH)</h3>
+                <div class="bg-slate-900/50 border border-slate-900 rounded-2xl overflow-hidden backdrop-blur">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-800 text-[10px] font-crypto text-slate-500 uppercase tracking-wider">
+                                <th class="py-3 px-4">Rang</th>
+                                <th class="py-3 px-4">Wal Name</th>
+                                <th class="py-3 px-4 text-right">Einstiegskurs</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body-1" class="divide-y divide-slate-900 text-sm"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODUS 2: SATS FOR FLEX ================= -->
+        <div id="mode-2-container" class="space-y-12 hidden">
+            <div class="text-center max-w-xl mx-auto space-y-6">
+                <div class="inline-block p-4 rounded-3xl bg-cyan-500/10 border border-cyan-500/20 shadow-2xl shadow-cyan-500/10 mb-2">
+                    <span class="text-6xl">🌊</span>
+                </div>
+                <h2 class="font-crypto text-3xl font-black text-white">
+                    Die Krypto-Fresskette
+                </h2>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Hier gewinnt, wer am meisten investiert. Füttere deinen Wal durch ständige Micro-Transactions nach oben, um Plankton und Humpbacks zu verschlingen!
+                </p>
+
+                <div class="space-y-4 text-left bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+                    <div>
+                        <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Dein Name / Wal</label>
+                        <input type="text" id="whale-name-2" placeholder="z. B. CryptoBaron" 
+                            class="w-full mt-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 font-crypto text-sm">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Investitions-Paket wählen</label>
+                        <select id="invest-amount" class="w-full mt-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 font-crypto text-sm">
+                            <option value="4.99">€4,99 - Kleiner Shrimp (Gewicht: 0.1t)</option>
+                            <option value="24.99">€24,99 - Delfin (Gewicht: 2.5t)</option>
+                            <option value="99.99">€99,99 - Killerwal (Gewicht: 15.0t)</option>
+                            <option value="499.99">€499,99 - Blauwal-Monarch (Gewicht: 100t)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="buyMode2()" class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-400 to-blue-600 text-slate-950 font-crypto font-black tracking-wider text-base shadow-lg shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
+                    INVESTIEREN & WAL FÜTTERN
+                </button>
+            </div>
+
+            <!-- Mode 2 Leaderboard & Chat -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <h3 class="font-crypto font-bold text-lg text-white">THE FOOD CHAIN</h3>
+                    <div class="bg-slate-900/50 border border-slate-900 rounded-2xl overflow-hidden backdrop-blur">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-800 text-[10px] font-crypto text-slate-500 uppercase tracking-wider">
+                                    <th class="py-3 px-4">Rang</th>
+                                    <th class="py-3 px-4">Name</th>
+                                    <th class="py-3 px-4 text-right">Gesamtwert</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboard-body-2" class="divide-y divide-slate-900 text-sm"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Flex Chat -->
+                <div class="space-y-4 flex flex-col">
+                    <h3 class="font-crypto font-bold text-lg text-white">WHALE FLEX CHAT</h3>
+                    <div class="bg-slate-900/50 border border-slate-900 rounded-2xl p-4 flex-grow flex flex-col justify-between h-64 backdrop-blur">
+                        <div id="chat-messages" class="space-y-2 overflow-y-auto text-xs pr-2 font-mono flex-grow">
+                            <div class="text-slate-500">[System]: Willkommen im exklusiven Wal-Chat. Nur für Investoren.</div>
+                            <div class="text-amber-400"><span class="font-bold">Satoshi_V:</span> Grüße an alle Geringverdiener von Platz 1.</div>
+                        </div>
+                        <div class="mt-3 flex gap-2">
+                            <input type="text" id="chat-input" placeholder="Flex-Nachricht senden..." class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white flex-grow focus:outline-none focus:border-cyan-400">
+                            <button onclick="sendChatMessage()" class="bg-cyan-500 text-slate-950 px-4 py-2 rounded-xl text-xs font-bold hover:bg-cyan-400 cursor-pointer">Senden</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 text-center py-6 text-xs text-slate-600 font-crypto">
+        I AM A WHALE SUITE © 2026 • READY FOR MICROSOFT STORE
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        let currentBtcPrice = 95000.00;
+
+        // Daten Modus 1
+        let dataMode1 = [
+            { name: "Satoshi_V", price: 104250.00 },
+            { name: "DiamondHands", price: 98500.50 },
+            { name: "CryptoKing", price: 73100.00 }
+        ];
+
+        // Daten Modus 2
+        let dataMode2 = [
+            { name: "WhaleBoss", total: 1250.00 },
+            { name: "BlueOcean", total: 450.00 },
+            { name: "CryptoShrimp", total: 25.00 }
+        ];
+
+        function switchMode(mode) {
+            if(mode === 1) {
+                document.getElementById('mode-1-container').classList.remove('hidden');
+                document.getElementById('mode-2-container').classList.add('hidden');
+                document.getElementById('tab-1').className = "px-4 py-2 rounded-lg transition-all bg-amber-500 text-slate-950 font-bold shadow";
+                document.getElementById('tab-2').className = "px-4 py-2 rounded-lg transition-all text-slate-400 hover:text-white";
+            } else {
+                document.getElementById('mode-1-container').classList.add('hidden');
+                document.getElementById('mode-2-container').classList.remove('hidden');
+                document.getElementById('tab-2').className = "px-4 py-2 rounded-lg transition-all bg-cyan-500 text-slate-950 font-bold shadow";
+                document.getElementById('tab-1').className = "px-4 py-2 rounded-lg transition-all text-slate-400 hover:text-white";
+            }
+        }
+
+        async function init() {
+            try {
+                let res = await fetch('https://api.coindesk.com/v1/bpi/currentprice/eur.json');
+                let data = await res.json();
+                currentBtcPrice = data.bpi.EUR.rate_float;
+            } catch(e) {}
+
+            document.getElementById('btc-ticker').innerText = `BTC: €${currentBtcPrice.toLocaleString('de-DE', {maximumFractionDigits: 0})}`;
+            document.getElementById('fiat-price-1').innerText = `€${currentBtcPrice.toLocaleString('de-DE', {maximumFractionDigits: 2})}`;
+            
+            renderMode1();
+            renderMode2();
+        }
+
+        function renderMode1() {
+            dataMode1.sort((a, b) => b.price - a.price);
+            const tbody = document.getElementById('leaderboard-body-1');
+            tbody.innerHTML = '';
+            dataMode1.forEach((item, idx) => {
+                let badge = idx === 0 ? '👑 1' : `#${idx + 1}`;
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-900/80 ${idx === 0 ? 'bg-amber-500/5 text-amber-300 font-semibold' : 'text-slate-300'}">
+                        <td class="py-3 px-4 font-crypto">${badge}</td>
+                        <td class="py-3 px-4">🐋 ${item.name}</td>
+                        <td class="py-3 px-4 text-right font-crypto">€${item.price.toLocaleString('de-DE', {minimumFractionDigits: 2})}</td>
+                    </tr>`;
+            });
+        }
+
+        function renderMode2() {
+            dataMode2.sort((a, b) => b.total - a.total);
+            const tbody = document.getElementById('leaderboard-body-2');
+            tbody.innerHTML = '';
+            dataMode2.forEach((item, idx) => {
+                let badge = idx === 0 ? '🦈 1' : `#${idx + 1}`;
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-900/80 ${idx === 0 ? 'bg-cyan-500/5 text-cyan-300 font-semibold' : 'text-slate-300'}">
+                        <td class="py-3 px-4 font-crypto">${badge}</td>
+                        <td class="py-3 px-4">🌊 ${item.name}</td>
+                        <td class="py-3 px-4 text-right font-crypto">€${item.total.toLocaleString('de-DE', {minimumFractionDigits: 2})}</td>
+                    </tr>`;
+            });
+        }
+
+        function buyMode1() {
+            let name = document.getElementById('whale-name-1').value.trim();
+            if(!name) return alert('Bitte Namen eingeben!');
+            dataMode1.push({ name: name, price: currentBtcPrice });
+            document.getElementById('whale-name-1').value = '';
+            renderMode1();
+            alert('Erfolgreich im Pantheon eingetragen!');
+        }
+
+        function buyMode2() {
+            let name = document.getElementById('whale-name-2').value.trim();
+            let amount = parseFloat(document.getElementById('invest-amount').value);
+            if(!name) return alert('Bitte Namen eingeben!');
+            
+            let existing = dataMode2.find(x => x.name.toLowerCase() === name.toLowerCase());
+            if(existing) {
+                existing.total += amount;
+            } else {
+                dataMode2.push({ name: name, total: amount });
+            }
+            document.getElementById('whale-name-2').value = '';
+            renderMode2();
+            alert('Wal erfolgreich gefüttert!');
+        }
+
+        function sendChatMessage() {
+            let input = document.getElementById('chat-input');
+            let text = input.value.trim();
+            if(!text) return;
+            let chat = document.getElementById('chat-messages');
+            chat.innerHTML += `<div class="text-cyan-300"><span class="font-bold">Du:</span> ${text}</div>`;
+            input.value = '';
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        init();
+    </script>
+</body>
+</html>
